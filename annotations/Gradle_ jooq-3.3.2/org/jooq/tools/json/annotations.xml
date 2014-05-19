@@ -1,0 +1,23 @@
+<root>
+    <item name='org.jooq.tools.json.ContainerFactory java.util.Map createObjectContainer()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='org.jooq.tools.json.JSONValue void writeJSONString(java.lang.Object, java.io.Writer) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.json.ContainerFactory java.util.List createArrayContainer()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='org.jooq.tools.json.JSONObject void writeJSONString(java.util.Map&lt;?,?&gt;, java.io.Writer) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.json.JSONArray void writeJSONString(java.util.List&lt;?&gt;, java.io.Writer) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

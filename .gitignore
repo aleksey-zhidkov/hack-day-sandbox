@@ -1,0 +1,6 @@
+build
+classes
+.gradle
+src/generated
+.idea/workspace.xml
+.idea/tasks.xml

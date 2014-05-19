@@ -1,0 +1,35 @@
+<root>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect call(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect field(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect create(java.lang.Object...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect create()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect java.util.Map&lt;java.lang.String,org.jooq.tools.reflect.Reflect&gt; fields()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect on(java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect call(java.lang.String, java.lang.Object...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect P as(java.lang.Class&lt;P&gt;) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect on(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect set(java.lang.String, java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.reflect.Reflect org.jooq.tools.reflect.Reflect on(java.lang.Class&lt;?&gt;)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

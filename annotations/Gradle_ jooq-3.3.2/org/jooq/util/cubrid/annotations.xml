@@ -1,0 +1,164 @@
+<root>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType CHARVARYING'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType DOUBLEPRECISION'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __LONGNVARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType SET'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType DECIMAL'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType CHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType INTEGER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType VARBIT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType BIT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType REAL'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType STRING'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType TIME'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType DATETIME'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType BIGINT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __TINYINTUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType SEQUENCE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType MULTISET'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDSL org.jooq.Field&lt;T&gt; decr(org.jooq.Field&lt;T&gt;) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __TINYINT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType BLOB'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __BIT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType MONETARY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType INT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __LONGVARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType FLOAT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __NUMERIC'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType NUMERIC'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType TIMESTAMP'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __UUID'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __FLOAT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType VARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType SMALLINT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType SHORT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType DATE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __NVARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType CHARACTERVARYING'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __BIGINTUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType ENUM'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType OID'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType CHARACTER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType CLOB'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType ELO'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType BITVARYING'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __BOOL'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDSL org.jooq.Field&lt;T&gt; incr(org.jooq.Field&lt;T&gt;) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __SMALLINTUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType DEC'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __BIGINTEGER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __INTEGERUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __NCLOB'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType NCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType __LONGVARBINARY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType OBJECT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.cubrid.CUBRIDDataType DOUBLE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

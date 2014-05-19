@@ -1,0 +1,5 @@
+<root>
+    <item name='org.jooq.exception.ControlFlowSignal java.lang.Throwable fillInStackTrace()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

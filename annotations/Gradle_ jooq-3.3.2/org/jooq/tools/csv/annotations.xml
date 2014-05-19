@@ -1,0 +1,8 @@
+<root>
+    <item name='org.jooq.tools.csv.CSVParser boolean isAllWhiteSpace(java.lang.CharSequence) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.tools.csv.CSVReader java.util.List&lt;java.lang.String[]&gt; readAll()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

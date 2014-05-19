@@ -1,0 +1,149 @@
+<root>
+    <item name='org.jooq.util.derby.DerbyDataType DEC'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType BOOLEAN'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType FLOAT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType DECIMAL'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __BIGINTEGER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __NVARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType DATE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __TINYINT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType VARCHARFORBITDATA'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType VARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType REAL'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __UUID'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __BIGINTUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType TIMESTAMP'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType DOUBLEPRECISION'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARACTERVARYINGFORBITDATA'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __NCLOB'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType TIME'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __VARBINARY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __LONGVARBINARY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARACTER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType SMALLINT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType INTEGER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __LONGNVARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType ORGAPACHEDERBYCATALOGTYPEDESCRIPTOR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARACTERLARGEOBJECT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __NCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType BINARYLARGEOBJECT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType LONGVARCHAR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARVARYING'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARACTERFORBITDATA'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARACTERVARYING'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType BLOB'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARVARYINGFORBITDATA'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType DOUBLE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CLOB'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType ORGAPACHEDERBYCATALOGINDEXDESCRIPTOR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __INTEGERUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __TINYINTUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType NUMERIC'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType CHARFORBITDATA'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType BIGINT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __BINARY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType INT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __SMALLINTUNSIGNED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType __BIT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType JAVAIOSERIALIZABLE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.util.derby.DerbyDataType LONGVARCHARFORBITDATA'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

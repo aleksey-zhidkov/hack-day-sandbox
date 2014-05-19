@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+    <!-- Configure the database connection here -->
+    <jdbc>
+        <driver>org.h2.Driver</driver>
+        <url>jdbc:h2:build/db/hds;FILE_LOCK=NO;MODE=PostgreSQL;schema=hds</url>
+        <user>sa</user>
+        <password></password>
+    </jdbc>
+
+    <generator>
+        <database>
+            <name>org.jooq.util.h2.H2Database</name>
+            <includes>.*</includes>
+            <excludes>DATABASECHANGELOG.*</excludes>
+            <inputSchema>PUBLIC</inputSchema>
+        </database>
+
+        <generate>
+            <daos>true</daos>
+            <immutablePojos>true</immutablePojos>
+        </generate>
+
+        <target>
+            <packageName>hds.db</packageName>
+            <directory>src/generated/java</directory>
+        </target>
+    </generator>
+</configuration>

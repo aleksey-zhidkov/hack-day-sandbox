@@ -1,0 +1,137 @@
+<root>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withRenderMapping(org.jooq.conf.RenderMapping)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderNameStyle UPPER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.SettingsTools boolean updatablePrimaryKeys(org.jooq.conf.Settings) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedTable org.jooq.conf.MappedTable withInput(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderNameStyle QUOTED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderMapping org.jooq.conf.RenderMapping withSchemata(java.util.List&lt;org.jooq.conf.MappedSchema&gt;)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedSchema org.jooq.conf.MappedSchema withInput(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ObjectFactory javax.xml.bind.JAXBElement&lt;org.jooq.conf.Settings&gt; createSettings(org.jooq.conf.Settings)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderKeywordStyle LOWER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderMapping org.jooq.conf.RenderMapping withDefaultSchema(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.SettingsTools org.jooq.conf.RenderMapping getRenderMapping(org.jooq.conf.Settings) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withExecuteLogging(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withExecuteWithOptimisticLocking(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedSchema org.jooq.conf.MappedSchema withOutput(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.SettingsTools org.jooq.conf.ParamType getParamType(org.jooq.conf.Settings)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.SettingsTools boolean reflectionCaching(org.jooq.conf.Settings) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withUpdatablePrimaryKeys(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withRenderKeywordStyle(org.jooq.conf.RenderKeywordStyle)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withAttachRecords(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ObjectFactory org.jooq.conf.RenderMapping createRenderMapping()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ParamType NAMED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedSchema org.jooq.conf.MappedSchema withTables(java.util.Collection&lt;org.jooq.conf.MappedTable&gt;)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.StatementType PREPARED_STATEMENT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withRenderNameStyle(org.jooq.conf.RenderNameStyle)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ParamType INDEXED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withReflectionCaching(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderKeywordStyle UPPER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withRenderSchema(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ObjectFactory org.jooq.conf.MappedSchema createMappedSchema()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedTable org.jooq.conf.MappedTable withOutput(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderNameStyle LOWER'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.SettingsTools org.jooq.conf.StatementType getStatementType(org.jooq.conf.Settings)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderMapping org.jooq.conf.RenderMapping withSchemata(org.jooq.conf.MappedSchema...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ObjectFactory org.jooq.conf.Settings createSettings()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.StatementType STATIC_STATEMENT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderNameStyle AS_IS'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.SettingsTools org.jooq.conf.Settings clone(org.jooq.conf.Settings) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withStatementType(org.jooq.conf.StatementType)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.RenderMapping org.jooq.conf.RenderMapping withSchemata(java.util.Collection&lt;org.jooq.conf.MappedSchema&gt;)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedSchema org.jooq.conf.MappedSchema withTables(java.util.List&lt;org.jooq.conf.MappedTable&gt;)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ObjectFactory org.jooq.conf.MappedTable createMappedTable()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.ParamType INLINED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withParamType(org.jooq.conf.ParamType)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.MappedSchema org.jooq.conf.MappedSchema withTables(org.jooq.conf.MappedTable...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.jooq.conf.Settings org.jooq.conf.Settings withRenderFormatted(java.lang.Boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

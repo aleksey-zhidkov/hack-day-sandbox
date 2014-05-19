@@ -1,0 +1,81 @@
+apply plugin: 'kotlin'
+apply plugin: 'war'
+
+apply from: 'http://plugins.jasoft.fi/vaadin.plugin'
+
+apply plugin: 'liquibase'
+
+buildscript {
+    def jooqVersion = '3.3.2'
+    ext.libraries = [
+            h2Db: 'com.h2database:h2:1.3.160',
+            kotlin: 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.7.271',
+            jooq: "org.jooq:jooq:$jooqVersion",
+            jooqCodeGen: "org.jooq:jooq-codegen:$jooqVersion"
+    ]
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath libraries.kotlin,
+                libraries.h2Db,
+                libraries.jooq,
+                'com.augusttechgroup:gradle-liquibase-plugin:0.7'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations { jooqCodeGenerator }
+
+dependencies {
+    def vaadinVersion = '7.2.0'
+    compile libraries.kotlin,
+            libraries.h2Db,
+            libraries.jooq,
+            "com.vaadin:vaadin-server:$vaadinVersion",
+            "com.vaadin:vaadin-push:$vaadinVersion",
+            'org.liquibase:liquibase-core:3.1.1'
+
+            jooqCodeGenerator libraries.jooqCodeGen,
+            libraries.h2Db
+}
+
+sourceSets {
+    generated {
+        java {
+            srcDirs = [ 'src/generated/java' ]
+        }
+    }
+}
+
+liquibase {
+    changelogs {
+        main {
+            file = file('src/main/resources/db/db-change-logs.xml')
+        }
+    }
+
+    databases {
+        sandbox {
+            url = 'jdbc:h2:build/db/hds;FILE_LOCK=NO;MODE=PostgreSQL'
+            username = 'sa'
+            password = ''
+        }
+    }
+
+    defaultDatabase = databases.sandbox
+}
+
+task generateJooq(type: JavaExec) {
+
+    group = 'DB'
+    workingDir = projectDir
+    main = 'org.jooq.util.GenerationTool'
+    classpath = configurations.jooqCodeGenerator + files(workingDir.toString() + "/config")
+    args = ['/jooq.xml']
+}
+
+generateJooq.dependsOn(update)
