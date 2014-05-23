@@ -10,6 +10,11 @@
             <param-name>UI</param-name>
             <param-value>hds.App</param-value>
         </init-param>
+        <init-param>
+            <param-name>pushmode</param-name>
+            <param-value>automatic</param-value>
+        </init-param>
+        <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>VaadinApplicationServlet</servlet-name>

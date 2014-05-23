@@ -31,15 +31,16 @@ repositories {
 configurations { jooqCodeGenerator }
 
 dependencies {
-    def vaadinVersion = '7.2.0'
+    def vaadinVersion = '7.1.15'
     compile libraries.kotlin,
             libraries.h2Db,
             libraries.jooq,
             "com.vaadin:vaadin-server:$vaadinVersion",
             "com.vaadin:vaadin-push:$vaadinVersion",
-            'org.liquibase:liquibase-core:3.1.1'
+            'org.liquibase:liquibase-core:3.1.1',
+            'org.postgresql:postgresql:9.3-1101-jdbc41'
 
-            jooqCodeGenerator libraries.jooqCodeGen,
+    jooqCodeGenerator libraries.jooqCodeGen,
             libraries.h2Db
 }
 
