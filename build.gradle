@@ -60,7 +60,7 @@ liquibase {
 
     databases {
         sandbox {
-            url = 'jdbc:h2:build/db/hds;FILE_LOCK=NO;MODE=PostgreSQL'
+            url = 'jdbc:h2:build/db/HDS;FILE_LOCK=NO;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS HDS'
             username = 'sa'
             password = ''
         }

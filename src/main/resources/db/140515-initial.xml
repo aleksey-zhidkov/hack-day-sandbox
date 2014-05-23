@@ -7,17 +7,18 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <changeSet context="prod" id="1" author="azhidkov">
-        <createTable tableName="USER">
-            <column name="ID" type="bigint" autoIncrement="true">
+        <createTable tableName="PERSON">
+            <column name="ID" type="serial" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="LOGIN" type="varchar(50)">
+            <column name="GITHUB_URL" type="varchar(4096)">
                 <constraints nullable="false"/>
             </column>
-            <column name="PASSWORD" type="varchar(50)">
+            <column name="NAME" type="varchar(128)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
     </changeSet>
 
 </databaseChangeLog>

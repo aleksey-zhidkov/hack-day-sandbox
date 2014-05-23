@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet context="prod" id="2" author="azhidkov">
+
+        <createTable tableName="LANGUAGE">
+            <column name="ID" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Java</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">JavaScript</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">C#</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Ruby</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">PHP</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Python</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Groovy</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Scala</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Kotlin</column>
+        </insert>
+
+        <createTable tableName="PERSON_LANGUAGES">
+            <column name="PERSON_ID" type="bigint">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="LANGUAGE_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LINES_COUNT" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="PERSON_LANGUAGES" columnNames="PERSON_ID,LANGUAGE_ID"/>
+
+        <addForeignKeyConstraint baseTableName="PERSON_LANGUAGES" baseColumnNames="PERSON_ID"
+                                 constraintName="PRSN_LNGS_PERSON_ID"
+                                 referencedTableName="PERSON"
+                                 referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="PERSON_LANGUAGES" baseColumnNames="LANGUAGE_ID"
+                                 constraintName="PRSN_LNGS_LANGUAGE_ID"
+                                 referencedTableName="LANGUAGE"
+                                 referencedColumnNames="ID"/>
+
+    </changeSet>
+</databaseChangeLog>

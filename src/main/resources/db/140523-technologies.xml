@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet context="prod" id="3" author="azhidkov">
+
+        <createTable tableName="TECHNOLOGY">
+            <column name="ID" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Android</column>
+        </insert>
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Spring</column>
+        </insert>
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Hibernate</column>
+        </insert>
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Akka</column>
+        </insert>
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Lift</column>
+        </insert>
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Liquibase</column>
+        </insert>
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">Gradle</column>
+        </insert>
+
+        <createTable tableName="PERSON_TECHNOLOGIES">
+            <column name="PERSON_ID" type="bigint">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="TECHNOLOGY_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LINES_COUNT" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="PERSON_TECHNOLOGIES" columnNames="PERSON_ID,TECHNOLOGY_ID"/>
+
+        <addForeignKeyConstraint baseTableName="PERSON_TECHNOLOGIES" baseColumnNames="PERSON_ID"
+                                 constraintName="PRSN_TECH_PERSON_ID"
+                                 referencedTableName="PERSON"
+                                 referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="PERSON_TECHNOLOGIES" baseColumnNames="TECHNOLOGY_ID"
+                                 constraintName="PRSN_TECH_TECHNOLOGY_ID"
+                                 referencedTableName="TECHNOLOGY"
+                                 referencedColumnNames="ID"/>
+
+    </changeSet>
+</databaseChangeLog>

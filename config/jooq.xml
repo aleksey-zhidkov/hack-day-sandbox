@@ -3,7 +3,7 @@
     <!-- Configure the database connection here -->
     <jdbc>
         <driver>org.h2.Driver</driver>
-        <url>jdbc:h2:build/db/hds;FILE_LOCK=NO;MODE=PostgreSQL;schema=hds</url>
+        <url>jdbc:h2:build/db/HDS;FILE_LOCK=NO;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS HDS</url>
         <user>sa</user>
         <password></password>
     </jdbc>
