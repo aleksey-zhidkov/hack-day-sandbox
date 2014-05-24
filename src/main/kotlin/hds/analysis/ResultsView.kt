@@ -6,13 +6,13 @@ import com.vaadin.navigator.ViewChangeListener
 import com.vaadin.ui.Label
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.themes.Reindeer
-import org.jooq.impl.DefaultConfiguration
-import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import hds.db.tables.PersonLanguages
 import hds.db.tables.Language
 import hds.db.tables.Person
 import hds.db.connection
+import hds.db.tables.Technology
+import hds.db.tables.PersonTechnologies
 
 public class ResultsView : VerticalLayout(), View {
 
@@ -68,6 +68,38 @@ public class ResultsView : VerticalLayout(), View {
 
                     val lbl = Label()
                     lbl.setValue("${lngName}: ${lngLinesCount} (${betterUsers + 1} Место" +
+                    ", Лучше ${(1 - ((betterUsers.toDouble() + 1) / totalUsers.toDouble())) * 100}% пользователей)")
+                    lbl.setSizeUndefined()
+                    addComponent(lbl)
+                    setComponentAlignment(lbl, Alignment.TOP_CENTER)
+                }
+
+                val resTech = create.select(Technology.TECHNOLOGY.NAME, PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT, PersonTechnologies.PERSON_TECHNOLOGIES.TECHNOLOGY_ID).
+                from(PersonTechnologies.PERSON_TECHNOLOGIES).
+                join(Technology.TECHNOLOGY).onKey().
+                join(Person.PERSON).onKey().
+                where(Person.PERSON.GITHUB_ID!!.equal(userId)).
+                orderBy(PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT!!.desc()).fetch()
+
+                resTech!!.forEach {
+
+                    val techName = it.getValue(0)
+                    val techLinesCount = (it.getValue(1) as Long).toLong()
+                    val techId = it.getValue(2) as Int
+
+                    val totalUsers = create.selectCount().
+                    from(PersonTechnologies.PERSON_TECHNOLOGIES).
+                    where(PersonTechnologies.PERSON_TECHNOLOGIES.TECHNOLOGY_ID!!.equal(techId)).
+                    fetchOne()!!.getValue(0) as Int
+
+                    val betterUsers = create.selectCount().
+                    from(PersonTechnologies.PERSON_TECHNOLOGIES).
+                    where(PersonTechnologies.PERSON_TECHNOLOGIES.TECHNOLOGY_ID!!.equal(techId)).
+                    and(PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT!!.gt(techLinesCount)).
+                    fetchOne()!!.getValue(0) as Int
+
+                    val lbl = Label()
+                    lbl.setValue("${techName}: ${techLinesCount} (${betterUsers + 1} Место" +
                     ", Лучше ${(1 - ((betterUsers.toDouble() + 1) / totalUsers.toDouble())) * 100}% пользователей)")
                     lbl.setSizeUndefined()
                     addComponent(lbl)

@@ -21,19 +21,21 @@ import hds.db.connection
 [Theme("reindeer")]
 public class App : UI() {
 
-    override fun init(request: VaadinRequest?) {
-        DriverManager.registerDriver(Driver())
-        val connection = connection()
-
-        try {
-            val liquibase = Liquibase("db/db-change-logs.xml", ClassLoaderResourceAccessor(), JdbcConnection(connection))
-            liquibase.update("prod")
-        } catch (ignore : MigrationFailedException) {
-        } finally {
-            connection.close()
+    class object {
+        {
+            DriverManager.registerDriver(Driver())
+            val connection = connection()
+            try {
+                val liquibase = Liquibase("db/db-change-logs.xml", ClassLoaderResourceAccessor(), JdbcConnection(connection))
+                liquibase.update("prod")
+            } catch (ignore: MigrationFailedException) {
+            } finally {
+                connection.close()
+            }
         }
+    }
 
-        val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
+    override fun init(request: VaadinRequest?) {
 
         val navigator: Navigator = Navigator(this, this)
         navigator.addView("", AnalysisView(navigator))
