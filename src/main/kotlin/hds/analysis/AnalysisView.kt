@@ -8,7 +8,11 @@ import com.vaadin.ui.Alignment
 import com.vaadin.ui.Button
 import com.vaadin.ui.Label
 import com.vaadin.ui.UI
+import java.util.concurrent.atomic.AtomicInteger
 import com.vaadin.navigator.Navigator
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicLong
 
 public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
 
@@ -21,16 +25,16 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
     private var reposLock = Object()
 
     private var totalRepos = 0
-
-    private var processedRepos = 0
+    
+    private val processedFiles = AtomicInteger(0)
 
     private var files = Label("Файлы")
 
+    private var linesByExtensionLabel = Label("Строки кода:")
+
     private var filesLock = Object()
 
-    private var totalFiles = 0
-
-    private var processedFiles = 0
+    private var processedRepos = 0
 
     {
         setSizeFull()
@@ -57,8 +61,11 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
 
         addComponent(files)
         setComponentAlignment(files, Alignment.MIDDLE_CENTER)
-    }
 
+        addComponent(linesByExtensionLabel)
+        setComponentAlignment(files, Alignment.BOTTOM_LEFT)
+    }
+    
     override fun enter(event: ViewChangeListener.ViewChangeEvent?) {
         ui = UI.getCurrent()
     }
@@ -79,7 +86,7 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
             if (ui != null) {
                 synchronized(filesLock) {
                     ui?.access {
-                        files.setValue("Файлы: $processedFiles/$totalFiles")
+                        files.setValue("Обработано файлов: $processedFiles")
                     }
                 }
             }
@@ -97,13 +104,16 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
         }
 
         override fun onFileFound() {
-            totalFiles += 1
             updateFiles()
         }
 
         override fun onFileProcessed() {
-            processedFiles += 1
+            processedFiles.incrementAndGet()
             updateFiles()
+        }
+
+        override fun onLinesByExtensionChanged(linesByExtension : ConcurrentHashMap<String, AtomicInteger>) {
+            linesByExtensionLabel.setValue("Строки кода: " + linesByExtension.toString())
         }
 
         override fun onFinish() {

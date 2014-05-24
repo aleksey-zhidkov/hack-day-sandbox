@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HackDaySandbox.iml" filepath="$PROJECT_DIR$/HackDaySandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hack-day-sandbox.iml" filepath="$PROJECT_DIR$/hack-day-sandbox.iml" />
     </modules>
   </component>
 </project>
