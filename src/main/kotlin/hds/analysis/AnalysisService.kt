@@ -2,20 +2,18 @@ package hds.analysis
 
 import kotlin.concurrent.thread
 import java.util.HashSet
-import java.util.HashMap
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
-import java.sql.DriverManager
-import org.jooq.impl.DefaultConfiguration
-import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import hds.db.tables.Language
-import hds.db.tables.PersonLanguages
-import hds.db.tables.Person
-import org.jooq.Condition
-import org.jooq.JoinType
-import java.util.ArrayList
 import java.util.Collections
+import hds.db.connection
+import hds.db.tables.PersonTechnologies
+import hds.db.tables.Technology
+import org.jooq.SQLDialect
+import org.jooq.impl.DefaultConfiguration
+import hds.db.tables.daos.PersonDao
+import hds.db.tables.daos.TechnologyDao
 
 public class AnalysisService() {
 
@@ -27,16 +25,15 @@ public class AnalysisService() {
             val repoNames = parser.repoNameList(githubUser)
 
             val linesByExt = ConcurrentHashMap<String, AtomicInteger>()
+            val linesByTechnology = ConcurrentHashMap<String, AtomicInteger>()
             repoNames?.forEach { repoName ->
                 val t = thread {
                     callback.onRepositoryFound()
                     try {
                         parser.cloneRepo(githubUser, repoName!!)
-                        parser.getLineCountByExt(githubUser, repoName!!, linesByExt, callback)/*parser.dirList(repoName ?: "", "", null)*/
+                        parser.getLineCountByExt(githubUser, repoName!!, linesByExt, linesByTechnology, callback)/*parser.dirList(repoName ?: "", "", null)*/
                         callback.onRepositoryProcessed()
-                    }
-                    catch (e : Throwable)
-                    {
+                    } catch (e: Throwable) {
                         println(e.getMessage() ?: "Unknown error")
                         callback.onError(e.getMessage() ?: "Unknown error")
                     }
@@ -45,49 +42,48 @@ public class AnalysisService() {
                 toWait.add(t)
             }
 
-            val languages = filterLanguages(Collections.list(linesByExt.keys()))
-
-            val connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hds", "hds", "hds")
-            val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
-            val create = DSL.using(connection)
-
-            languages.forEach {l -> create
-                    .mergeInto(Language.LANGUAGE)
-                    .using(create.selectOne())
-                    .on(Language.LANGUAGE.NAME?.equal(l))
-                    .whenNotMatchedThenInsert(Language.LANGUAGE.NAME).values(l).execute()
-            }
-
-            val selectQuery = create.select(Language.LANGUAGE.ID, Language.LANGUAGE.NAME)
-
-            //TODO
-//            languages.forEach { l -> selectQuery.addConditions(Language.LANGUAGE.NAME?.equal(l))}
-            val idsLanguages = selectQuery.from(Language.LANGUAGE).fetch()
-
-            val personId = create.select(Person.PERSON.ID).from(Person.PERSON).where(Person.PERSON.NAME?.eq(githubUser)).fetchOne()!!.getValue(0) as Long
-
-//            idsLanguages?.forEach {l -> create
-//                    .mergeInto(PersonLanguages.PERSON_LANGUAGES)
-//                    .using(create.selectOne())
-//                    .on(PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID?.equal(l.getValue(0) as Long)?.and(PersonLanguages.PERSON_LANGUAGES.PERSON_ID?.equal(personId)))
-//                    .whenNotMatchedThenInsert(PersonLanguages.PERSON_LANGUAGES.PERSON_ID, PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID, PersonLanguages.PERSON_LANGUAGES.LINES_COUNT).values(personId, l.getValue(0), l.getValue(1)).execute()
-//                    .whenMatchedThenUpdate(Language.LANGUAGE.NAME).values(l).execute()
-//            }
-
-//            val res = create.mergeInto(Language.LANGUAGE.NAME, PersonLanguages.PERSON_LANGUAGES.LINES_COUNT, PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID).
-
             for (t in toWait) {
                 t.join()
             }
+
+            val connection = connection()
+            val create = DSL.using(connection)
+
+            val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
+            val personID: Int = PersonDao(conf).fetchByGithubId(githubUser)!!.head!!.getId()!!
+
+            for ((tech, linesCount) in linesByTechnology) {
+                val techs = TechnologyDao(conf).fetchByName(tech)!!.head
+                if (techs == null) {
+                    System.err.println(tech)
+                    continue
+                }
+                val techId: Int = techs.getId()!!
+                val pt = (create.select(PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT).
+                from(PersonTechnologies.PERSON_TECHNOLOGIES).
+                join(Technology.TECHNOLOGY).onKey().
+                where(Technology.TECHNOLOGY.NAME!!.equal(tech)).fetchOne()?.getValue(0) as Long?) ?: 0
+
+                if (pt == 0L) {
+                    create.insertInto(PersonTechnologies.PERSON_TECHNOLOGIES,
+                            PersonTechnologies.PERSON_TECHNOLOGIES.PERSON_ID, PersonTechnologies.PERSON_TECHNOLOGIES.TECHNOLOGY_ID,
+                            PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT).values(personID, techId, linesCount.get().toLong()).execute()
+                } else {
+                    create.update(PersonTechnologies.PERSON_TECHNOLOGIES).
+                    set(PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT, linesCount.get().toLong()).
+                    where(PersonTechnologies.PERSON_TECHNOLOGIES.PERSON_ID!!.equal(personID)).
+                    and(PersonTechnologies.PERSON_TECHNOLOGIES.TECHNOLOGY_ID!!.equal(techId)).execute()
+                }
+            }
+
             callback.onFinish()
         }
     }
 
-    fun filterLanguages(potentialLanguages : List<String>) : List<String> {
+    fun filterLanguages(potentialLanguages: List<String>): List<String> {
         return potentialLanguages.filter { l ->
-            when(l)
-            {
-                "java", "js", "rb", "py", "haml", "cs", "cpp", "h", "css", "clj", "asm" -> true
+            when(l) {
+                "java", "js", "rb", "py", "haml", "cs", "cpp", "h", "css", "clj", "asm", "kt", "scala" -> true
                 else -> false
             }
         }

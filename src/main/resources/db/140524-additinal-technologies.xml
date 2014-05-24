@@ -15,5 +15,16 @@
             <column name="NAME">JOOQ</column>
         </insert>
 
+
     </changeSet>
+
+    <changeSet context="prod" id="2" author="azhidkov">
+
+        <insert tableName="TECHNOLOGY">
+            <column name="NAME">JPA</column>
+        </insert>
+
+
+    </changeSet>
+
 </databaseChangeLog>

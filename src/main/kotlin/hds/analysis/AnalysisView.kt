@@ -118,7 +118,7 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
 
         override fun onFinish() {
             ui?.access {
-                navigator.navigateTo("${ResultsView.NAME}/${githubUser.getValue()}")
+                //navigator.navigateTo("${ResultsView.NAME}/${githubUser.getValue()}")
             }
         }
 

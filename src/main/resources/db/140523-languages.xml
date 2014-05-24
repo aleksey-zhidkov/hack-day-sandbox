@@ -69,4 +69,11 @@
                                  referencedColumnNames="ID"/>
 
     </changeSet>
+
+    <changeSet context="prod" id="3" author="azhidkov">
+        <insert tableName="LANGUAGE">
+            <column name="NAME">C++</column>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
