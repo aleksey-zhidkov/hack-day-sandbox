@@ -14,11 +14,17 @@
             <param-name>pushmode</param-name>
             <param-value>automatic</param-value>
         </init-param>
+        <init-param>
+            <param-name>org.atmosphere.useNative</param-name>
+            <param-value>true</param-value>
+        </init-param>
         <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>VaadinApplicationServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
+
 
 </web-app>

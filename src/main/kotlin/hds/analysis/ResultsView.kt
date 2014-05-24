@@ -6,13 +6,13 @@ import com.vaadin.navigator.ViewChangeListener
 import com.vaadin.ui.Label
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.themes.Reindeer
-import java.sql.DriverManager
 import org.jooq.impl.DefaultConfiguration
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import hds.db.tables.PersonLanguages
 import hds.db.tables.Language
 import hds.db.tables.Person
+import hds.db.connection
 
 public class ResultsView : VerticalLayout(), View {
 
@@ -39,8 +39,7 @@ public class ResultsView : VerticalLayout(), View {
             if (userId is String) {
                 userIdLbl.setValue("GitHub ID: $userId")
 
-                val connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hds", "hds", "hds")
-                val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
+                val connection = connection()
 
                 val create = DSL.using(connection)
                 val res = create.select(Language.LANGUAGE.NAME, PersonLanguages.PERSON_LANGUAGES.LINES_COUNT, PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID).

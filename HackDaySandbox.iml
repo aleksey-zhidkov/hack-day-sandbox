@@ -12,9 +12,9 @@
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/generated/java" />
           <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/generated/resources" />
           <root url="file://$MODULE_DIR$/src/main/kotlin" />
           <root url="file://$MODULE_DIR$/src/generated/kotlin" />
+          <root url="file://$MODULE_DIR$/src/generated/resources" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
@@ -57,9 +57,8 @@
     <orderEntry type="library" exported="" name="Gradle: commons-cli-1.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: vaadin-theme-compiler-7.1.15" level="project" />
     <orderEntry type="library" exported="" name="Gradle: atmosphere-compat-jbossweb-1.0.18.vaadin3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: atmosphere-compat-tomcat-1.0.18.vaadin3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: atmosphere-compat-tomcat7-1.0.18.vaadin3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: atmosphere-runtime-1.0.18.vaadin3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: atmosphere-compat-tomcat-1.0.18.vaadin3" level="project" />
   </component>
 </module>
 

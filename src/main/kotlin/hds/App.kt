@@ -15,6 +15,7 @@ import org.postgresql.Driver
 import hds.analysis.ResultsView
 import com.vaadin.annotations.Theme
 import liquibase.exception.MigrationFailedException
+import hds.db.connection
 
 [Push]
 [Theme("reindeer")]
@@ -22,7 +23,7 @@ public class App : UI() {
 
     override fun init(request: VaadinRequest?) {
         DriverManager.registerDriver(Driver())
-        val connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hds", "hds", "hds")
+        val connection = connection()
 
         try {
             val liquibase = Liquibase("db/db-change-logs.xml", ClassLoaderResourceAccessor(), JdbcConnection(connection))
