@@ -8,10 +8,13 @@ import com.vaadin.ui.Alignment
 import com.vaadin.ui.Button
 import com.vaadin.ui.Label
 import com.vaadin.ui.UI
+import com.vaadin.navigator.Navigator
 
-public class AnalysisView : HorizontalLayout(), View {
+public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
 
     private var ui: UI? = null
+
+    private val githubUser = TextField("GitHub user")
 
     private var repositories = Label("Репозитории")
 
@@ -32,7 +35,6 @@ public class AnalysisView : HorizontalLayout(), View {
     {
         setSizeFull()
 
-        val githubUser = TextField("GitHub user")
         githubUser.setInputPrompt("Имя пользователя GitHub")
         githubUser.setCaption("")
         addComponent(githubUser)
@@ -42,10 +44,11 @@ public class AnalysisView : HorizontalLayout(), View {
         addComponent(analyze)
         setComponentAlignment(analyze, Alignment.MIDDLE_CENTER)
         analyze.addListener {
-            if (githubUser.getValue() != null) {
+            val githubUserId = githubUser.getValue()
+            if (githubUserId != null && githubUserId.isNotEmpty()) {
                 githubUser.setEnabled(false)
                 analyze.setEnabled(false)
-                AnalysisService().analyze(githubUser.getValue()!!, AnalysisCallbackImpl())
+                AnalysisService().analyze(githubUserId, AnalysisCallbackImpl())
             }
         }
 
@@ -104,7 +107,9 @@ public class AnalysisView : HorizontalLayout(), View {
         }
 
         override fun onFinish() {
-            println("AAAA")
+            ui?.access {
+                navigator.navigateTo("${ResultsView.NAME}/${githubUser.getValue()}")
+            }
         }
 
         override fun onError(reason: String) {

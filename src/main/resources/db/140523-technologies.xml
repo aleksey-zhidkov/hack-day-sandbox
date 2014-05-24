@@ -40,10 +40,10 @@
         </insert>
 
         <createTable tableName="PERSON_TECHNOLOGIES">
-            <column name="PERSON_ID" type="bigint">
+            <column name="PERSON_ID" type="int">
                 <constraints nullable="false"></constraints>
             </column>
-            <column name="TECHNOLOGY_ID" type="bigint">
+            <column name="TECHNOLOGY_ID" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="LINES_COUNT" type="bigint">

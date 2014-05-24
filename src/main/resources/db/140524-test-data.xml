@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet context="test" id="1" author="azhidkov">
+
+        <insert tableName="PERSON">
+            <column name="GITHUB_ID">aleksey-zhidkov</column>
+            <column name="GITHUB_URL">not null</column>
+            <column name="NAME">Aleksey Zhidkov</column>
+        </insert>
+    </changeSet>
+
+    <changeSet context="test" id="2" author="azhidkov">
+
+        <sql>
+            INSERT INTO PERSON_LANGUAGES
+                (SELECT P.ID, L.ID, 15322
+                 FROM PERSON P, LANGUAGE L
+                 WHERE GITHUB_ID = 'aleksey-zhidkov' AND L.NAME = 'Java');
+            INSERT INTO PERSON_LANGUAGES
+                (SELECT P.ID, L.ID, 4322
+                 FROM PERSON P, LANGUAGE L
+                 WHERE GITHUB_ID = 'aleksey-zhidkov' AND L.NAME = 'Kotlin');
+        </sql>
+
+    </changeSet>
+
+    <changeSet context="test" id="3" author="azhidkov">
+
+        <insert tableName="PERSON">
+            <column name="GITHUB_ID">aleksey-zhidkov</column>
+            <column name="GITHUB_URL">not null</column>
+            <column name="NAME">Aleksey Zhidkov</column>
+        </insert>
+
+        <sql>
+            INSERT INTO PERSON_LANGUAGES
+            (SELECT P.ID, L.ID, 15322
+            FROM PERSON P, LANGUAGE L
+            WHERE GITHUB_ID = 'aleksey-zhidkov' AND L.NAME = 'Java');
+            INSERT INTO PERSON_LANGUAGES
+            (SELECT P.ID, L.ID, 4322
+            FROM PERSON P, LANGUAGE L
+            WHERE GITHUB_ID = 'aleksey-zhidkov' AND L.NAME = 'Kotlin');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

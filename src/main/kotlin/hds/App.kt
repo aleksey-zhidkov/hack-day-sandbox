@@ -12,21 +12,31 @@ import java.sql.DriverManager
 import com.vaadin.navigator.Navigator
 import hds.analysis.AnalysisView
 import org.postgresql.Driver
+import hds.analysis.ResultsView
+import com.vaadin.annotations.Theme
+import liquibase.exception.MigrationFailedException
 
 [Push]
+[Theme("reindeer")]
 public class App : UI() {
 
     override fun init(request: VaadinRequest?) {
         DriverManager.registerDriver(Driver())
         val connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hds", "hds", "hds")
 
-        val liquibase = Liquibase("db/db-change-logs.xml", ClassLoaderResourceAccessor(), JdbcConnection(connection))
-        liquibase.update("prod")
+        try {
+            val liquibase = Liquibase("db/db-change-logs.xml", ClassLoaderResourceAccessor(), JdbcConnection(connection))
+            liquibase.update("prod")
+        } catch (ignore : MigrationFailedException) {
+        } finally {
+            connection.close()
+        }
 
         val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
 
         val navigator: Navigator = Navigator(this, this)
-        navigator.addView("", AnalysisView())
+        navigator.addView("", AnalysisView(navigator))
+        navigator.addView(ResultsView.NAME, ResultsView())
     }
 
 

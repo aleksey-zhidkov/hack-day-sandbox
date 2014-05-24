@@ -46,10 +46,10 @@
         </insert>
 
         <createTable tableName="PERSON_LANGUAGES">
-            <column name="PERSON_ID" type="bigint">
+            <column name="PERSON_ID" type="int">
                 <constraints nullable="false"></constraints>
             </column>
-            <column name="LANGUAGE_ID" type="bigint">
+            <column name="LANGUAGE_ID" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="LINES_COUNT" type="bigint">
