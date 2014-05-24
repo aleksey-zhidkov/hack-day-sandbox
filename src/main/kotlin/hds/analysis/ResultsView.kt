@@ -42,17 +42,34 @@ public class ResultsView : VerticalLayout(), View {
                 val connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hds", "hds", "hds")
                 val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
 
-                val res = DSL.using(connection).
-                select(Language.LANGUAGE.NAME, PersonLanguages.PERSON_LANGUAGES.LINES_COUNT).
-                        from(PersonLanguages.PERSON_LANGUAGES).
-                        join(Language.LANGUAGE).on(PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID!!.equal(Language.LANGUAGE.ID)).
-                        join(Person.PERSON).on(PersonLanguages.PERSON_LANGUAGES.PERSON_ID!!.equal(Person.PERSON.ID)).
-                        where(Person.PERSON.GITHUB_ID!!.equal(userId)).
-                        orderBy(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT).fetch()
+                val create = DSL.using(connection)
+                val res = create.select(Language.LANGUAGE.NAME, PersonLanguages.PERSON_LANGUAGES.LINES_COUNT, PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID).
+                from(PersonLanguages.PERSON_LANGUAGES).
+                join(Language.LANGUAGE).onKey().
+                join(Person.PERSON).onKey().
+                where(Person.PERSON.GITHUB_ID!!.equal(userId)).
+                orderBy(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT!!.desc()).fetch()
 
                 res!!.forEach {
+
+                    val lngName = it.getValue(0)
+                    val lngLinesCount = (it.getValue(1) as Long).toLong()
+                    val lngId = it.getValue(2) as Int
+
+                    val totalUsers = create.selectCount().
+                    from(PersonLanguages.PERSON_LANGUAGES).
+                    where(PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID!!.equal(lngId)).
+                    fetchOne()!!.getValue(0) as Int
+
+                    val betterUsers = create.selectCount().
+                                        from(PersonLanguages.PERSON_LANGUAGES).
+                                        where(PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID!!.equal(lngId)).
+                                        and(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT!!.gt(lngLinesCount)).
+                                        fetchOne()!!.getValue(0) as Int
+
                     val lbl = Label()
-                    lbl.setValue("${it.getValue(0)}: ${it.getValue(1)}")
+                    lbl.setValue("${lngName}: ${lngLinesCount} (${betterUsers + 1} Место" +
+                    ", Лучше ${(1 - ((betterUsers.toDouble() + 1) / totalUsers.toDouble())) * 100}% пользователей)")
                     lbl.setSizeUndefined()
                     addComponent(lbl)
                     setComponentAlignment(lbl, Alignment.TOP_CENTER)

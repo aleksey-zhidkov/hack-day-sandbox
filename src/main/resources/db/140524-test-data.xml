@@ -33,20 +33,20 @@
     <changeSet context="test" id="3" author="azhidkov">
 
         <insert tableName="PERSON">
-            <column name="GITHUB_ID">aleksey-zhidkov</column>
+            <column name="GITHUB_ID">aleksey-zhidkov2</column>
             <column name="GITHUB_URL">not null</column>
             <column name="NAME">Aleksey Zhidkov</column>
         </insert>
 
         <sql>
             INSERT INTO PERSON_LANGUAGES
-            (SELECT P.ID, L.ID, 15322
+            (SELECT P.ID, L.ID, 1532
             FROM PERSON P, LANGUAGE L
-            WHERE GITHUB_ID = 'aleksey-zhidkov' AND L.NAME = 'Java');
+            WHERE GITHUB_ID = 'aleksey-zhidkov2' AND L.NAME = 'Java');
             INSERT INTO PERSON_LANGUAGES
-            (SELECT P.ID, L.ID, 4322
+            (SELECT P.ID, L.ID, 43221
             FROM PERSON P, LANGUAGE L
-            WHERE GITHUB_ID = 'aleksey-zhidkov' AND L.NAME = 'Kotlin');
+            WHERE GITHUB_ID = 'aleksey-zhidkov2' AND L.NAME = 'Kotlin');
         </sql>
 
     </changeSet>
