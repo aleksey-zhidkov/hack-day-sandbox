@@ -2,7 +2,6 @@ package hds.db
 
 import java.sql.DriverManager
 import java.sql.Connection
-import org.jooq.ResultQuery
 import org.jooq.impl.DSL
 import hds.db.tables.Language
 import hds.db.tables.PersonLanguages
@@ -25,7 +24,7 @@ public class DB {
         return connection()
     }
 
-    fun resultsLanguages(userId: String): List<String>{
+    fun resultsLanguages(userId: String): List<String> {
         val connection = connection()
 
         val create = DSL.using(connection)
@@ -108,6 +107,38 @@ public class DB {
             " Есть куда расти)"
         } else {
             ", Лучше ${Math.round(percentrage)}% пользователей)"
+        }
+    }
+
+    fun getLngRatings(name: String): List<RatingRow> {
+        val connection = connection()
+        val create = DSL.using(connection)
+
+        var place = 0;
+        return create.select(Person.PERSON.GITHUB_ID, PersonLanguages.PERSON_LANGUAGES.LINES_COUNT).
+        from(PersonLanguages.PERSON_LANGUAGES).
+        join(Person.PERSON).onKey().
+        join(Language.LANGUAGE).onKey().
+        where(Language.LANGUAGE.NAME!!.equal(name)).
+        orderBy(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT!!.desc()).fetch()!!.map {
+            place += 1
+            RatingRow(place, it.getValue(0) as String, it.getValue(1) as Long)
+        }
+    }
+
+    fun getTechRatings(name: String): List<RatingRow> {
+        val connection = connection()
+        val create = DSL.using(connection)
+
+        var place = 0;
+        return create.select(Person.PERSON.GITHUB_ID, PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT).
+        from(PersonTechnologies.PERSON_TECHNOLOGIES).
+        join(Person.PERSON).onKey().
+        join(Technology.TECHNOLOGY).onKey().
+        where(Technology.TECHNOLOGY.NAME!!.equal(name)).
+        orderBy(PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT!!.desc()).fetch()!!.map {
+            place += 1
+            RatingRow(place, it.getValue(0) as String, it.getValue(1) as Long)
         }
     }
 

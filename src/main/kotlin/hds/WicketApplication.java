@@ -31,6 +31,12 @@ public class WicketApplication extends WebApplication
         }
     }
 
+    @Override
+    protected void init() {
+        super.init();
+        mountPage("ratings", RatingsPage.class);
+    }
+
     public Class<HomePage> getHomePage()
     {
         return HomePage.class;

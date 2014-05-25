@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/spacelab/bootstrap.min.css">
+    <title>AtmoResume</title>
+    <style type="text/css">
+        table tr td {
+            text-align: center;
+        }
+        table thead th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header"><a class="navbar-brand" href="#">AtmoResume</a></div>
+
+    </div>
+
+    <div class="panel panel-default" style="margin-top: 200px; width: 100%">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Рейтинг по
+                <span id="techs" wicket:id="lng"></span>
+            </h3>
+        </div>
+        <table style="width: 100%" wicket:id="datatable"></table>
+    </div>
+</div>
+</body>
+</html>
