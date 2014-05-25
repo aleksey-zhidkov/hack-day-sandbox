@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class HomePage extends WebPage implements IAjaxIndicatorAware {
+public class HomePage extends WebPage {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,17 +38,12 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
     private final Label languages;
     private final Label techs;
 
-    private AjaxIndicatorAppender indicator = new AjaxIndicatorAppender();
-
     private AtomicInteger progress = new AtomicInteger();
 
     private String userId;
     private String currentUserLanguages = "";
     private String currentUserTechs = "";
     private final Component progressBar;
-
-//    private final AjaxIndicatorAppender indicator = new AjaxIndicatorAppender();
-
 
     /**
      * Constructor that is invoked when page is invoked without a session.
@@ -97,13 +92,6 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
 
         githubName = new TextField<>("githubName", Model.<String> of());
 
-//        IModel<Integer> progressModel = new LoadableDetachableModel<Integer>() {
-//            @Override
-//            protected Integer load() {
-//                return getProgress();
-//            }
-//        };
-
         progressBar = new WebComponent("progressBar");
         progressBar.add(new AttributeModifier("style", new LoadableDetachableModel<String>() {
             @Override
@@ -111,10 +99,7 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
                 return "width:" + progress.get() + "%";
             }
         }));
-        progressBar.add(indicator);
-        progressBar.setOutputMarkupId(true);
 
-        add(progressBar);
         OnChangeAjaxBehavior onChangeAjaxBehavior = new OnChangeAjaxBehavior() {
 
             private static final long serialVersionUID =
@@ -130,6 +115,11 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
                 target.add(progressBar);
             }
         };
+
+        progressBar.setOutputMarkupId(true);
+
+        add(progressBar);
+
 
         githubName.add(onChangeAjaxBehavior);
 
@@ -151,9 +141,9 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
 
                 languages.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
                 techs.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
-                progressBar.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND) {
-
-                });
+//                progressBar.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND) {
+//
+//                });
 
                 target.add(languages);
                 target.add(techs);
@@ -180,12 +170,6 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
             return 0;
 
         return (int) ((double) processedRepos.get()) / reposCount.get() * 100;
-    }
-
-    @Override
-    public String getAjaxIndicatorMarkupId()
-    {
-        return this.indicator.getMarkupId();
     }
 
     public class AnalysisCallbackImpl implements AnalysisCallback {
