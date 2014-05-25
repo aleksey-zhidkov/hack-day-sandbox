@@ -53,15 +53,7 @@ public class DB {
             and(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT!!.gt(lngLinesCount)).
             fetchOne()!!.getValue(0) as Int
 
-            val percentrage = (1 - ((betterUsers.toDouble() + 1) / totalUsers.toDouble())) * 100
-            val pStr = if (betterUsers == 0) {
-                " из 1-ого:)"
-            } else if (betterUsers + 1 == totalUsers) {
-                "Есть куда рости"
-            } else {
-                ", Лучше ${Math.round(percentrage)}% пользователей)"
-            }
-            "${lngName}: ${lngLinesCount} (${betterUsers + 1} Место" + pStr
+            "${lngName}: ${lngLinesCount} (${betterUsers + 1} Место" + getPercentage(betterUsers, totalUsers)
         }
 
         connection.close()
@@ -97,18 +89,26 @@ public class DB {
             fetchOne()!!.getValue(0) as Int
 
 
-            val percentrage = (1 - ((betterUsers.toDouble() + 1) / totalUsers.toDouble())) * 100
-            val pStr = if (betterUsers == 0) {
-                " из 1-ого:)"
-            } else if (betterUsers + 1 == totalUsers) {
-                "Есть куда рости"
-            } else {
-                ", Лучше ${Math.round(percentrage)}% пользователей)"
-            }
-            "${techName}: ${techName} (${betterUsers + 1} Место" + pStr
+            "${techName}: ${techLinesCount} (${betterUsers + 1} Место" + getPercentage(betterUsers, totalUsers)
         }
 
         connection.close()
         return techs
     }
+
+    fun getPercentage(betterUsers: Int, totalUsers: Int): String {
+        val percentrage = (1 - ((betterUsers.toDouble() + 1) / totalUsers.toDouble())) * 100
+        return if (betterUsers == 0) {
+            if (totalUsers == 1) {
+                " из 1-ого:)"
+            } else {
+                " из ${totalUsers}, молодец, чемпион!:)"
+            }
+        } else if (betterUsers + 1 == totalUsers) {
+            " Есть куда рости"
+        } else {
+            ", Лучше ${Math.round(percentrage)}% пользователей)"
+        }
+    }
+
 }
