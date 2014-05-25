@@ -6,14 +6,17 @@ import hds.db.DB;
 import jet.runtime.typeinfo.JetValueParameter;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxIndicatorAppender;
 import org.apache.wicket.markup.html.WebComponent;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -38,6 +41,9 @@ public class HomePage extends WebPage {
     private String userId;
     private String currentUserLanguages = "";
     private String currentUserTechs = "";
+
+//    private final AjaxIndicatorAppender indicator = new AjaxIndicatorAppender();
+
 
     /**
      * Constructor that is invoked when page is invoked without a session.
@@ -83,7 +89,24 @@ public class HomePage extends WebPage {
         add(techs);
 
         githubName = new TextField<>("githubName", Model.<String> of());
-        final Component progressBar = new WebComponent("progressBar");
+
+        IModel<Integer> progressModel = new LoadableDetachableModel<Integer>() {
+            @Override
+            protected Integer load() {
+                return getProgress();
+            }
+        };
+
+        final Component progressBar = new WebComponent("progressBar", progressModel);
+        progressBar.add(new AttributeModifier("style", new LoadableDetachableModel<String>() {
+            @Override
+            protected String load() {
+                return "width:" + getProgress() + "%";
+            }
+        }));
+        progressBar.add(new AjaxIndicatorAppender());
+        progressBar.setOutputMarkupId(true);
+
         add(progressBar);
         OnChangeAjaxBehavior onChangeAjaxBehavior = new OnChangeAjaxBehavior() {
 
@@ -92,10 +115,6 @@ public class HomePage extends WebPage {
 
             @Override
             protected void onUpdate(final AjaxRequestTarget target) {
-
-                // Maybe you want to update some components here?
-
-                // Access the updated model object:
                 Object defaultModelObject = getComponent().getDefaultModelObject();
                 final String value = defaultModelObject != null ? defaultModelObject.toString() : "";
 
@@ -113,21 +132,15 @@ public class HomePage extends WebPage {
         {
             @Override
             public void onClick(AjaxRequestTarget target) {
-                repos.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
-                files.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
-                progressBar.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND) {
-                    @Override
-                    protected void onPostProcessTarget(AjaxRequestTarget target) {
-                        int progress = (int) ((double) processedRepos.get()) / reposCount.get() * 100;
-                        if (progress > 100)
-                            progress = 100;
-                        progressBar.add(new AttributeModifier("style", "width: " + progress + "%;"));
-                        target.add(progressBar);
-                    }
+                    repos.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
+                    files.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
+                    progressBar.add(new AjaxIndicatorAppender() {
                 });
                 target.add(repos);
                 target.add(files);
                 target.add(progressBar);
+                currentUserLanguages = "";
+                currentUserTechs = "";
 
                 languages.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
                 techs.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
@@ -139,6 +152,7 @@ public class HomePage extends WebPage {
                 reposCount.set(0);
                 processedFiles.set(0);
 
+
                 userId = githubName.getValue();
                 analysisService.analyze(userId, analysisCallback);
             }
@@ -148,6 +162,13 @@ public class HomePage extends WebPage {
         add(files);
 
 
+    }
+
+    private Integer getProgress() {
+        if (reposCount.get() == 0 || processedRepos.get() == 0)
+            return 0;
+
+        return (int) ((double) processedRepos.get()) / reposCount.get();
     }
 
     public class AnalysisCallbackImpl implements AnalysisCallback {
