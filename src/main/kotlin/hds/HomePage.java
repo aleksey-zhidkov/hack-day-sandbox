@@ -8,8 +8,10 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
+import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxIndicatorAppender;
 import org.apache.wicket.markup.html.WebComponent;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -237,13 +239,13 @@ public class HomePage extends WebPage implements IAjaxIndicatorAware {
         DB db = new DB();
         StringBuffer buffer = new StringBuffer();
         for (String lng: db.resultsLanguages(userId)) {
-            buffer.append(lng).append("<br/><br/>");
+            buffer.append("<a href=\"ratings?type=lng&lng=" + lng.substring(0, lng.indexOf(':')) + "\">").append(lng).append("</a>").append("<br/><br/>");
         }
         currentUserLanguages = buffer.toString();
 
         buffer = new StringBuffer();
         for (String lng: db.resultsTechs(userId)) {
-            buffer.append(lng).append("<br/><br/>");
+            buffer.append("<a href=\"ratings?type=tech&lng=" + lng.substring(0, lng.indexOf(':')) + "\">").append(lng).append("</a>").append("<br/><br/>");
         }
         currentUserTechs = buffer.toString();
     }
