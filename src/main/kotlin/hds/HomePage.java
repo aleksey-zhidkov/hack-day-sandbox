@@ -9,10 +9,8 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
-import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.AjaxIndicatorAppender;
 import org.apache.wicket.markup.html.WebComponent;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -44,7 +42,7 @@ public class HomePage extends WebPage {
     private String userId;
     private String currentUserLanguages = "";
     private String currentUserTechs = "";
-    private final Component progressBar;
+//    private final Component progressBar;
 
     /**
      * Constructor that is invoked when page is invoked without a session.
@@ -93,13 +91,13 @@ public class HomePage extends WebPage {
 
         githubName = new TextField<>("githubName", Model.<String> of());
 
-        progressBar = new WebComponent("progressBar");
-        progressBar.add(new AttributeModifier("style", new LoadableDetachableModel<String>() {
-            @Override
-            protected String load() {
-                return "width:" + progress.get() + "%";
-            }
-        }));
+//        progressBar = new WebComponent("progressBar");
+//        progressBar.add(new AttributeModifier("style", new LoadableDetachableModel<String>() {
+//            @Override
+//            protected String load() {
+//                return "width:" + progress.get() + "%";
+//            }
+//        }));
 
         OnChangeAjaxBehavior onChangeAjaxBehavior = new OnChangeAjaxBehavior() {
 
@@ -111,26 +109,24 @@ public class HomePage extends WebPage {
                 Object defaultModelObject = getComponent().getDefaultModelObject();
                 final String value = defaultModelObject != null ? defaultModelObject.toString() : "";
 
-
-                githubName.setModelValue(new String[]{value});
-                target.add(progressBar);
+               githubName.setModelValue(new String[]{value});
             }
         };
 
-        progressBar.setOutputMarkupId(true);
-        final AbstractAjaxTimerBehavior timer = new AbstractAjaxTimerBehavior(Duration.ONE_SECOND) {
+//        progressBar.setOutputMarkupId(true);
+//        final AbstractAjaxTimerBehavior timer = new AbstractAjaxTimerBehavior(Duration.ONE_SECOND) {
+//
+//            private static final long serialVersionUID = 1L;
+//
+//            @Override
+//            protected void onTimer(AjaxRequestTarget target)
+//            {
+//                target.add(progressBar);
+//            }
+//        };
+//        progressBar.add(timer);
 
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void onTimer(AjaxRequestTarget target)
-            {
-                target.add(progressBar);
-            }
-        };
-        progressBar.add(timer);
-
-        add(progressBar);
+//        add(progressBar);
 
 
         githubName.add(onChangeAjaxBehavior);
@@ -147,7 +143,6 @@ public class HomePage extends WebPage {
 
                 target.add(repos);
                 target.add(files);
-                target.add(progressBar);
                 currentUserLanguages = "";
                 currentUserTechs = "";
 
@@ -159,7 +154,6 @@ public class HomePage extends WebPage {
 
                 target.add(languages);
                 target.add(techs);
-                target.add(progressBar);
 
 
                 processedRepos.set(0);
