@@ -9,6 +9,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
+import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxIndicatorAppender;
@@ -26,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class HomePage extends WebPage {
+public class HomePage extends WebPage implements IAjaxIndicatorAware {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,6 +39,8 @@ public class HomePage extends WebPage {
     private final TextField<String> githubName;
     private final Label languages;
     private final Label techs;
+
+    private AjaxIndicatorAppender indicator = new AjaxIndicatorAppender();
 
     private AtomicInteger progress = new AtomicInteger();
 
@@ -110,7 +113,7 @@ public class HomePage extends WebPage {
                 return "width:" + progress.get() + "%";
             }
         }));
-//        progressBar.add(new AjaxIndicatorAppender());
+        progressBar.add(indicator);
         progressBar.setOutputMarkupId(true);
 
         add(progressBar);
@@ -126,6 +129,7 @@ public class HomePage extends WebPage {
 
 
                 githubName.setModelValue(new String[]{value});
+                target.add(progressBar);
             }
         };
 
@@ -141,7 +145,6 @@ public class HomePage extends WebPage {
                     repos.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
                     files.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
 
-                progressBar.setVisible(true);
                 target.add(repos);
                 target.add(files);
                 target.add(progressBar);
@@ -181,6 +184,12 @@ public class HomePage extends WebPage {
         return (int) ((double) processedRepos.get()) / reposCount.get() * 100;
     }
 
+    @Override
+    public String getAjaxIndicatorMarkupId()
+    {
+        return this.indicator.getMarkupId();
+    }
+
     public class AnalysisCallbackImpl implements AnalysisCallback {
 
         @NotNull
@@ -218,7 +227,7 @@ public class HomePage extends WebPage {
         @Override
         public void onFinish() {
             getResults();
-            progressBar.setVisible(false);
+            progress.set(0);
         }
 
         @NotNull
