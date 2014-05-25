@@ -77,6 +77,7 @@ public class HomePage extends WebPage {
                 return currentUserLanguages;
             }
         });
+        languages.setEscapeModelStrings(false);
 
         techs = new Label("techs", new LoadableDetachableModel<Object>() {
             @Override
@@ -84,6 +85,7 @@ public class HomePage extends WebPage {
                 return currentUserTechs;
             }
         });
+        techs.setEscapeModelStrings(false);
 
         add(languages);
         add(techs);
@@ -220,13 +222,13 @@ public class HomePage extends WebPage {
         DB db = new DB();
         StringBuffer buffer = new StringBuffer();
         for (String lng: db.resultsLanguages(userId)) {
-            buffer.append(lng).append("\n");
+            buffer.append(lng).append("<br/>");
         }
         currentUserLanguages = buffer.toString();
 
         buffer = new StringBuffer();
         for (String lng: db.resultsTechs(userId)) {
-            buffer.append(lng).append("\n");
+            buffer.append(lng).append("<br/>");
         }
         currentUserTechs = buffer.toString();
     }

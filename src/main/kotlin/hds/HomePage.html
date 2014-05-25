@@ -17,46 +17,40 @@
             </div>
         </div>
 
-        <div class="panel panel-default" style="margin-top: 200px; width: 45%">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Строк по языкам
-                </h3>
+    <div class="row">
+            <div class="col-md-6" style="margin-top: 200px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Строк по языкам
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div id="languages" class="col-lg-10" wicket:id="languages"></div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div id="languages" class="col-lg-10" wicket:id="languages"></div>
+
+            <div class="col-md-6" style="margin-top: 200px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Строк по технологиям
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div id="techs" class="col-lg-10" wicket:id="techs"></div>
+                </div>
             </div>
         </div>
-
-        <div class="panel panel-default" style="margin-top: 200px; width: 45%">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Строк по технологиям
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div id="techs" class="col-lg-10" wicket:id="techs"></div>
-            </div>
-        </div>
-
-
-
-
-            <!--<div style="padding-top: 500px;float: right;">-->
-                <!---->
-            <!--</div>-->
-
-        </div>
+     </div>
 <div class="progress progress-striped active">
-    <div class="progress-bar" style="width: 50%" wicket:id="progressBar"></div>
+    <div class="progress-bar" style="width:0%" wicket:id="progressBar" id="progressBar"></div>
 </div>
 <div id="footer">
     <div class="container">
         <p class="muted credit">
-            <label class="control-label" for="repos">Репозиториев обработано:</label>
-            <div id="repos" class="col-lg-10" wicket:id="repos"/>
-            <label class="control-label" for="repos">Файлов обработано:</label>
-            <div id="files" class="col-lg-10" wicket:id="files"/>
+            <span class="control-label" for="repos">Репозиториев обработано:</span>
+            <span id="repos" class="col-lg-10" wicket:id="repos"/>
+            <span class="control-label" for="repos">Файлов обработано:</span>
+            <span id="files" class="col-lg-10" wicket:id="files"/>
         </p>
     </div>
 </div>
