@@ -1,8 +1,6 @@
 apply plugin: 'kotlin'
 apply plugin: 'war'
 
-apply from: 'http://plugins.jasoft.fi/vaadin.plugin'
-
 apply plugin: 'liquibase'
 
 wicketVersion = '1.5.3'
@@ -33,11 +31,8 @@ repositories {
 configurations { jooqCodeGenerator }
 
 dependencies {
-    def vaadinVersion = '7.1.15'
     compile libraries.kotlin,
             libraries.jooq,
-            "com.vaadin:vaadin-server:$vaadinVersion",
-            "com.vaadin:vaadin-push:$vaadinVersion",
             'org.liquibase:liquibase-core:3.1.1',
             'org.postgresql:postgresql:9.3-1101-jdbc41',
     		'org.apache.httpcomponents:httpclient:4.0-alpha4',

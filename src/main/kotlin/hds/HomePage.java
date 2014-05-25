@@ -197,7 +197,16 @@ public class HomePage extends WebPage {
 
     private void getResults() {
         DB db = new DB();
-        currentUserLanguages = String.join("\n", db.resultsLanguages(userId));
-        currentUserTechs = String.join("\n", db.resultsTechs(userId));
+        StringBuffer buffer = new StringBuffer();
+        for (String lng: db.resultsLanguages(userId)) {
+            buffer.append(lng).append("\n");
+        }
+        currentUserLanguages = buffer.toString();
+
+        buffer = new StringBuffer();
+        for (String lng: db.resultsTechs(userId)) {
+            buffer.append(lng).append("\n");
+        }
+        currentUserTechs = buffer.toString();
     }
 }

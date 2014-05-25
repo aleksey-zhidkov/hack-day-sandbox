@@ -62,7 +62,8 @@ public class GithubParser(githubUsername: String) {
             "kt" to "Kotlin",
             "groovy" to "Groovy",
             "php" to "PHP",
-            "scala" to "Scala"
+            "scala" to "Scala",
+            "go" to "Go"
     )
 
     val pass = "123qwe!";
@@ -85,12 +86,6 @@ public class GithubParser(githubUsername: String) {
         }
         val response = httpclient.execute(httpGet)
         return IOUtils.toString(response?.getEntity()?.getContent())
-    }
-
-    fun cloneAllUserRepos(userName: String): List<String?>? {
-        val repoNames = repoNameList(userName)
-        repoNames?.forEach { r -> cloneRepo(userName, r!!) }
-        return repoNames
     }
 
     fun getLineCountByExt(userName: String,

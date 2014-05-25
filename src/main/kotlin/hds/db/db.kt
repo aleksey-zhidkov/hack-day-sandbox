@@ -7,8 +7,6 @@ import org.jooq.impl.DSL
 import hds.db.tables.Language
 import hds.db.tables.PersonLanguages
 import hds.db.tables.Person
-import com.vaadin.ui.Label
-import com.vaadin.ui.Alignment
 import hds.db.tables.Technology
 import hds.db.tables.PersonTechnologies
 
