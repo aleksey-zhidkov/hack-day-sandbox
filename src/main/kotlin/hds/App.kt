@@ -18,7 +18,7 @@ import liquibase.exception.MigrationFailedException
 import hds.db.connection
 
 [Push]
-[Theme("reindeer")]
+[Theme("bootstrap")]
 public class App : UI() {
 
     class object {

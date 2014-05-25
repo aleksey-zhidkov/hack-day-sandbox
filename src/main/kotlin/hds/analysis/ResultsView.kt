@@ -46,7 +46,7 @@ public class ResultsView : VerticalLayout(), View {
                 from(PersonLanguages.PERSON_LANGUAGES).
                 join(Language.LANGUAGE).onKey().
                 join(Person.PERSON).onKey().
-                where(Person.PERSON.GITHUB_ID!!.equal(userId)).
+                where(Person.PERSON.GITHUB_URL!!.equal(userId)).
                 orderBy(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT!!.desc()).fetch()
 
                 res!!.forEach {

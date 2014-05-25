@@ -1,30 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
-    <servlet>
-        <servlet-name>VaadinApplicationServlet</servlet-name>
-        <servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
-        <init-param>
-            <param-name>UI</param-name>
-            <param-value>hds.App</param-value>
-        </init-param>
-        <init-param>
-            <param-name>pushmode</param-name>
-            <param-value>automatic</param-value>
-        </init-param>
-        <init-param>
-            <param-name>org.atmosphere.useNative</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <async-supported>true</async-supported>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>VaadinApplicationServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
 
+<display-name>quickstart</display-name>
 
+<filter>
+    <filter-name>wicket.hds</filter-name>
+    <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+    <init-param>
+        <param-name>applicationClassName</param-name>
+        <param-value>hds.WicketApplication</param-value>
+    </init-param>
+</filter>
+
+<filter-mapping>
+    <filter-name>wicket.hds</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+    <context-param>
+        <param-name>configuration</param-name>
+        <param-value>deployment</param-value>
+    </context-param>
 
 </web-app>

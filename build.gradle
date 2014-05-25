@@ -5,6 +5,8 @@ apply from: 'http://plugins.jasoft.fi/vaadin.plugin'
 
 apply plugin: 'liquibase'
 
+wicketVersion = '1.5.3'
+
 buildscript {
     def jooqVersion = '3.3.2'
     ext.libraries = [
@@ -43,6 +45,9 @@ dependencies {
     		'org.apache.commons:commons-io:1.3.2',
     		'org.codehaus.jackson:jackson-mapper-asl:1.8.5',
             'org.eclipse.jgit:org.eclipse.jgit.java7:3.3.2.201404171909-r'
+
+    compile group: 'org.apache.wicket', name: 'wicket', version: wicketVersion
+    compile group: 'org.apache.wicket', name: 'wicket-extensions', version: wicketVersion
 
 
     jooqCodeGenerator libraries.jooqCodeGen,

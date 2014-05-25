@@ -7,7 +7,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <include file="140515-initial.xml" relativeToChangelogFile="true"/>
-    <include file="140523-languages.xml" relativeToChangelogFile="true"/>
+    <include file="140525-languages.xml" relativeToChangelogFile="true"/>
     <include file="140523-technologies.xml" relativeToChangelogFile="true"/>
     <include file="140524-person-github-id.xml" relativeToChangelogFile="true"/>
     <include file="140524-test-data.xml" relativeToChangelogFile="true"/>

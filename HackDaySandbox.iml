@@ -70,6 +70,9 @@
     <orderEntry type="library" exported="" name="Gradle: atmosphere-compat-jbossweb-1.0.18.vaadin3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: atmosphere-runtime-1.0.18.vaadin3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: atmosphere-compat-tomcat-1.0.18.vaadin3" level="project" />
+    <orderEntry type="library" name="Gradle: wicket-core-1.5.3" level="project" />
+    <orderEntry type="library" name="Gradle: wicket-request-1.5.3" level="project" />
+    <orderEntry type="library" name="Gradle: wicket-util-1.5.3" level="project" />
   </component>
 </module>
 

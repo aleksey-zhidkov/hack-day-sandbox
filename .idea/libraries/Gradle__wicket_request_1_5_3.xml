@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: wicket-request-1.5.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.wicket/wicket-request/1.5.3/ad41e81ce3317b9d28fdc2a9371a9249b96826bd/wicket-request-1.5.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.wicket/wicket-request/1.5.3/561900c597d798733dad2d11ab4affb588abf871/wicket-request-1.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

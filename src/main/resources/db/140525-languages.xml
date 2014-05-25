@@ -42,6 +42,27 @@
             <column name="NAME">Scala</column>
         </insert>
         <insert tableName="LANGUAGE">
+            <column name="NAME">Clojure</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Shell</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Dart</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Haskell</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Erlang</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">CoffeeScript</column>
+        </insert>
+        <insert tableName="LANGUAGE">
+            <column name="NAME">Go</column>
+        </insert>
+        <insert tableName="LANGUAGE">
             <column name="NAME">Kotlin</column>
         </insert>
 

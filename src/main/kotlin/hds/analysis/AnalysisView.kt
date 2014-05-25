@@ -13,10 +13,18 @@ import com.vaadin.navigator.Navigator
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
+import com.vaadin.ui.FormLayout
+import com.vaadin.ui.CustomLayout
+import com.vaadin.ui.CssLayout
+import com.vaadin.ui.VerticalLayout
 
 public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
 
     private var ui: UI? = null
+
+    private val centerLayout = VerticalLayout()
+
+    private val formLayout = FormLayout()
 
     private val githubUser = TextField("GitHub user")
 
@@ -37,16 +45,27 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
     private var processedRepos = 0
 
     {
-        setSizeFull()
+//        centerLayout.addStyleName("center")
+//        setSizeFull()
+        val analyze = Button("Анализировать")
+        analyze.addStyleName("btn btn-primary")
 
+        centerLayout.setSizeFull()
+//        formLayout.addStyleName("form-horizontal")
         githubUser.setInputPrompt("Имя пользователя GitHub")
         githubUser.setCaption("")
-        addComponent(githubUser)
-        setComponentAlignment(githubUser, Alignment.MIDDLE_CENTER)
+        githubUser.addStyleName("form-control")
+        formLayout.addComponent(analyze)
+        formLayout.addComponent(githubUser)
+        centerLayout.addComponent(formLayout)
+        addComponent(centerLayout)
+        centerLayout.setComponentAlignment(formLayout, Alignment.MIDDLE_CENTER)
+//        setComponentAlignment(githubUser, Alignment.MIDDLE_CENTER)
 
-        val analyze = Button("Анализировать")
-        addComponent(analyze)
-        setComponentAlignment(analyze, Alignment.MIDDLE_CENTER)
+
+
+
+//        setComponentAlignment(analyze, Alignment.MIDDLE_CENTER)
         analyze.addListener {
             val githubUserId = githubUser.getValue()
             if (githubUserId != null && githubUserId.isNotEmpty()) {
@@ -56,14 +75,14 @@ public class AnalysisView(val navigator: Navigator) : HorizontalLayout(), View {
             }
         }
 
-        addComponent(repositories)
+//        addComponent(repositories)
         setComponentAlignment(repositories, Alignment.MIDDLE_CENTER)
 
-        addComponent(files)
-        setComponentAlignment(files, Alignment.MIDDLE_CENTER)
+//        addComponent(files)
+//        setComponentAlignment(files, Alignment.MIDDLE_CENTER)
 
-        addComponent(linesByExtensionLabel)
-        setComponentAlignment(files, Alignment.BOTTOM_LEFT)
+//        addComponent(linesByExtensionLabel)
+//        setComponentAlignment(files, Alignment.BOTTOM_LEFT)
     }
     
     override fun enter(event: ViewChangeListener.ViewChangeEvent?) {

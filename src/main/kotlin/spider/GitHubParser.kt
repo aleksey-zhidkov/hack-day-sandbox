@@ -46,6 +46,13 @@ public class GithubParser(githubUsername: String) {
 
     private val langugaes = mapOf(
             "java" to "Java",
+            "erl" to "Erlang",
+            "go" to "Go",
+            "hs" to "Haskell",
+            "dart" to "Dart",
+            "sh" to "Shell",
+            "coffee" to "CoffeeScript",
+            "clj" to "Clojure",
             "js" to "JavaScript",
             "rb" to "Ruby",
             "py" to "Python",
@@ -85,7 +92,6 @@ public class GithubParser(githubUsername: String) {
         repoNames?.forEach { r -> cloneRepo(userName, r!!) }
         return repoNames
     }
-
 
     fun getLineCountByExt(userName: String,
                           repoName: String,

@@ -33,7 +33,7 @@ public class AnalysisService() {
                     callback.onRepositoryFound()
                     try {
                         parser.cloneRepo(githubUser, repoName!!)
-                        parser.getLineCountByExt(githubUser, repoName!!, linesByExt, linesByTechnology, callback)/*parser.dirList(repoName ?: "", "", null)*/
+                        parser.getLineCountByExt(githubUser, repoName, linesByExt, linesByTechnology, callback)/*parser.dirList(repoName ?: "", "", null)*/
                         callback.onRepositoryProcessed()
                     } catch (e: Throwable) {
                         println(e.getMessage() ?: "Unknown error")
@@ -55,7 +55,7 @@ public class AnalysisService() {
             val personDao = PersonDao(conf)
             var persons = personDao.fetchByGithubId(githubUser)!!.head
 
-            val personID: Int = if (persons == null) {
+            val personID: Int? = if (persons == null) {
                 create.insertInto(Person.PERSON, Person.PERSON.GITHUB_ID,
                         Person.PERSON.GITHUB_URL, Person.PERSON.NAME).
                 values(githubUser, githubUser, githubUser).
@@ -123,7 +123,7 @@ public class AnalysisService() {
     fun filterLanguages(potentialLanguages: List<String>): List<String> {
         return potentialLanguages.filter { l ->
             when(l) {
-                "java", "js", "rb", "py", "haml", "cs", "cpp", "h", "css", "clj", "asm", "kt", "scala" -> true
+                "java", "erl", "sh", "dart", "coffee", "go", "hs", "js", "rb", "py", "haml", "cs", "cpp", "clj", "asm", "kt", "scala" -> true
                 else -> false
             }
         }
