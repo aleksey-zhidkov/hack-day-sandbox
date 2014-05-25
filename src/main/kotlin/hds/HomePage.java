@@ -6,6 +6,7 @@ import hds.db.DB;
 import jet.runtime.typeinfo.JetValueParameter;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
@@ -117,6 +118,17 @@ public class HomePage extends WebPage {
         };
 
         progressBar.setOutputMarkupId(true);
+        final AbstractAjaxTimerBehavior timer = new AbstractAjaxTimerBehavior(Duration.ONE_SECOND) {
+
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void onTimer(AjaxRequestTarget target)
+            {
+                target.add(progressBar);
+            }
+        };
+        progressBar.add(timer);
 
         add(progressBar);
 
