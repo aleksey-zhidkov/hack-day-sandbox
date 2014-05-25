@@ -38,9 +38,13 @@ public class HomePage extends WebPage {
     private final TextField<String> githubName;
     private final Label languages;
     private final Label techs;
+
+    private AtomicInteger progress = new AtomicInteger();
+
     private String userId;
     private String currentUserLanguages = "";
     private String currentUserTechs = "";
+    private final Component progressBar;
 
 //    private final AjaxIndicatorAppender indicator = new AjaxIndicatorAppender();
 
@@ -92,21 +96,21 @@ public class HomePage extends WebPage {
 
         githubName = new TextField<>("githubName", Model.<String> of());
 
-        IModel<Integer> progressModel = new LoadableDetachableModel<Integer>() {
-            @Override
-            protected Integer load() {
-                return getProgress();
-            }
-        };
+//        IModel<Integer> progressModel = new LoadableDetachableModel<Integer>() {
+//            @Override
+//            protected Integer load() {
+//                return getProgress();
+//            }
+//        };
 
-        final Component progressBar = new WebComponent("progressBar", progressModel);
+        progressBar = new WebComponent("progressBar");
         progressBar.add(new AttributeModifier("style", new LoadableDetachableModel<String>() {
             @Override
             protected String load() {
-                return "width:" + getProgress() + "%";
+                return "width:" + progress.get() + "%";
             }
         }));
-        progressBar.add(new AjaxIndicatorAppender());
+//        progressBar.add(new AjaxIndicatorAppender());
         progressBar.setOutputMarkupId(true);
 
         add(progressBar);
@@ -136,8 +140,8 @@ public class HomePage extends WebPage {
             public void onClick(AjaxRequestTarget target) {
                     repos.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
                     files.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
-                    progressBar.add(new AjaxIndicatorAppender() {
-                });
+
+                progressBar.setVisible(true);
                 target.add(repos);
                 target.add(files);
                 target.add(progressBar);
@@ -146,14 +150,18 @@ public class HomePage extends WebPage {
 
                 languages.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
                 techs.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND));
+                progressBar.add(new AjaxSelfUpdatingTimerBehavior(Duration.ONE_SECOND) {
+
+                });
 
                 target.add(languages);
                 target.add(techs);
+                target.add(progressBar);
+
 
                 processedRepos.set(0);
                 reposCount.set(0);
                 processedFiles.set(0);
-
 
                 userId = githubName.getValue();
                 analysisService.analyze(userId, analysisCallback);
@@ -170,7 +178,7 @@ public class HomePage extends WebPage {
         if (reposCount.get() == 0 || processedRepos.get() == 0)
             return 0;
 
-        return (int) ((double) processedRepos.get()) / reposCount.get();
+        return (int) ((double) processedRepos.get()) / reposCount.get() * 100;
     }
 
     public class AnalysisCallbackImpl implements AnalysisCallback {
@@ -185,6 +193,7 @@ public class HomePage extends WebPage {
         @Override
         public void onRepositoryProcessed() {
             processedRepos.incrementAndGet();
+            progress.set(getProgress());
         }
 
         @NotNull
@@ -209,6 +218,7 @@ public class HomePage extends WebPage {
         @Override
         public void onFinish() {
             getResults();
+            progressBar.setVisible(false);
         }
 
         @NotNull
@@ -222,13 +232,13 @@ public class HomePage extends WebPage {
         DB db = new DB();
         StringBuffer buffer = new StringBuffer();
         for (String lng: db.resultsLanguages(userId)) {
-            buffer.append(lng).append("<br/>");
+            buffer.append(lng).append("<br/><br/>");
         }
         currentUserLanguages = buffer.toString();
 
         buffer = new StringBuffer();
         for (String lng: db.resultsTechs(userId)) {
-            buffer.append(lng).append("<br/>");
+            buffer.append(lng).append("<br/><br/>");
         }
         currentUserTechs = buffer.toString();
     }

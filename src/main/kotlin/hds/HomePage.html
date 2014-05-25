@@ -10,7 +10,7 @@
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header"><a class="navbar-brand" href="#">AtmoResume</a></div>
             <div class="input-group" style="float: right;margin-right: 100px;">
-                <button type="submit" id="analyze" class="btn btn-default btn-info" wicket:id="analyze">Узнать всё <i class="icon-info-sign"></i></button>
+                <button type="submit" id="analyze" style="float: right;" class="btn btn-default btn-info" wicket:id="analyze">Узнать всё <i class="icon-info-sign"></i></button>
                 <div class="" style="float: right; margin-right: 20px;">
                     <input type="text" class="form-control" onload="focus()" id="focusedInput" placeholder="Имя на GitHub" wicket:id="githubName">
                 </div>
@@ -47,10 +47,11 @@
 <div id="footer">
     <div class="container">
         <p class="muted credit">
-            <span class="control-label" for="repos">Репозиториев обработано:</span>
-            <span id="repos" class="col-lg-10" wicket:id="repos"/>
-            <span class="control-label" for="repos">Файлов обработано:</span>
-            <span id="files" class="col-lg-10" wicket:id="files"/>
+            <span class="control-label">Репозиториев обработано:</span>
+            <span id="repos" wicket:id="repos"/>
+            <br/>
+            <span class="control-label">Файлов обработано:</span>
+            <span id="files" wicket:id="files"/>
         </p>
     </div>
 </div>
