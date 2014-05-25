@@ -104,32 +104,33 @@ public class GithubParser(githubUsername: String) {
                 val lng = langugaes[ext.toLowerCase()]
                 if (lng != null) {
                     val lineCount = LineNumberReader(FileReader(File(filePath?.toAbsolutePath().toString()))).read()
-                    linesByExt.putIfAbsent(lng, AtomicInteger())
-                    val counter = linesByExt[lng]
-                    counter?.addAndGet(lineCount)
+                    if (lineCount > 0) {
+                        linesByExt.putIfAbsent(lng, AtomicInteger())
+                        val counter = linesByExt[lng]
+                        counter?.addAndGet(lineCount)
 
-                    println("Parsing file $fileName")
-                    val stream = FileInputStream(File(filePath?.toAbsolutePath().toString())).buffered();
-                    try {
-                        val reader = InputStreamReader(stream, "UTF-8");
-                        val parsedTechs = HashSet<String>()
-                        reader.forEachLine({
+                        println("Parsing file $fileName")
+                        val stream = FileInputStream(File(filePath?.toAbsolutePath().toString())).buffered();
+                        try {
+                            val reader = InputStreamReader(stream, "UTF-8");
+                            val parsedTechs = HashSet<String>()
+                            reader.forEachLine({
 
-                            for ((trigger, tech) in techTriggers) {
-                                if (it.contains(trigger) && !parsedTechs.contains(tech)) {
-                                    linesByTechnology.putIfAbsent(tech, AtomicInteger())
-                                    val techCounter = linesByTechnology[tech]
-                                    techCounter?.addAndGet(lineCount)
-                                    parsedTechs.add(tech)
+                                for ((trigger, tech) in techTriggers) {
+                                    if (it.contains(trigger) && !parsedTechs.contains(tech)) {
+                                        linesByTechnology.putIfAbsent(tech, AtomicInteger())
+                                        val techCounter = linesByTechnology[tech]
+                                        techCounter?.addAndGet(lineCount)
+                                        parsedTechs.add(tech)
+                                    }
                                 }
                             }
+                            )
+                        } finally {
+                            stream.close();
                         }
-                        )
-                    } finally {
-                        stream.close();
                     }
                 }
-
 
                 callback.onFileProcessed()
                 callback.onLinesByExtensionChanged(linesByExt)
@@ -152,15 +153,22 @@ public class GithubParser(githubUsername: String) {
         println("Pulling $userName/$repoName")
         try {
             val git = when(dir.exists()) {
-                true -> Git.open(dir)
+                true -> {
+                    Git.open(dir)
+                }
                 else -> {
-                    dir.mkdir(); Git.cloneRepository()?.setURI(githubRepoLink(userName, repoName))?.setDirectory(dir)?./*setCredentialsProvider(user)*/call()
+                    dir.mkdir();
+                    Git.cloneRepository()?.setURI(githubRepoLink(userName, repoName))?.setDirectory(dir)?.call()
                 }
             }
 
+            println("Git opened")
             git?.fetch()?.call()
+            println("Fetch called")
             git?.checkout()?.setName("master")?.call()
+            println("Fetch checkout called")
             git?.reset()?.setMode(ResetType.HARD)?.call()
+            println("Fetch reset called")
         } catch (e: Throwable) {
             println(e.getMessage() ?: "Unknown error")
         }

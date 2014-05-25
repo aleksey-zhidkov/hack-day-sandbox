@@ -44,28 +44,35 @@ public class AnalysisService() {
                 toWait.add(t)
             }
 
+            var i = 1
             for (t in toWait) {
+                println("Wait for $i repo")
                 t.join()
+                println("$i repo processed, ${toWait.size() - i} remains")
+                i += 1
             }
 
+            println("Getting connection")
             val connection = connection()
             val create = DSL.using(connection)
 
             val conf = DefaultConfiguration().set(connection).set(SQLDialect.POSTGRES)
             val personDao = PersonDao(conf)
+            println("$githubUser")
             var persons = personDao.fetchByGithubId(githubUser)!!.head
 
             val personID: Int? = if (persons == null) {
+                println("inserting person $githubUser")
                 create.insertInto(Person.PERSON, Person.PERSON.GITHUB_ID,
                         Person.PERSON.GITHUB_URL, Person.PERSON.NAME).
                 values(githubUser, githubUser, githubUser).
-                returning(Person.PERSON.ID).
-                fetchOne()!!.
-                getId()
+                execute()
+                personDao.fetchByGithubId(githubUser)!!.head!!.getId()!!
             } else {
                 persons!!.getId()!!
             }
 
+            println("inserting technologies personId=$personID")
             for ((tech, linesCount) in linesByTechnology) {
                 val techs = TechnologyDao(conf).fetchByName(tech)!!.head
                 if (techs == null) {
@@ -76,9 +83,10 @@ public class AnalysisService() {
                 val pt = (create.select(PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT).
                 from(PersonTechnologies.PERSON_TECHNOLOGIES).
                 join(Technology.TECHNOLOGY).onKey().
-                where(Technology.TECHNOLOGY.NAME!!.equal(tech)).fetchOne()?.getValue(0) as Long?) ?: 0
+                where(Technology.TECHNOLOGY.NAME!!.equal(tech)).fetchOne()?.getValue(0) as Long?)
+                println("techId = $techId")
 
-                if (pt == 0L) {
+                if (pt == null) {
                     create.insertInto(PersonTechnologies.PERSON_TECHNOLOGIES,
                             PersonTechnologies.PERSON_TECHNOLOGIES.PERSON_ID, PersonTechnologies.PERSON_TECHNOLOGIES.TECHNOLOGY_ID,
                             PersonTechnologies.PERSON_TECHNOLOGIES.LINES_COUNT).values(personID, techId, linesCount.get().toLong()).execute()
@@ -90,6 +98,7 @@ public class AnalysisService() {
                 }
             }
 
+            println("inserting languages")
             for ((lng, linesCount) in linesByExt) {
                 val lngs = LanguageDao(conf).fetchByName(lng)!!.head
                 if (lngs == null) {
@@ -97,14 +106,15 @@ public class AnalysisService() {
                     continue
                 }
                 val lngId: Int = lngs.getId()!!
+                println("lngId = $lngId")
                 val pt = (create.select(PersonLanguages.PERSON_LANGUAGES.LINES_COUNT).
                 from(PersonLanguages.PERSON_LANGUAGES).
                 join(Language.LANGUAGE).onKey().
                 where(Language.LANGUAGE.NAME!!.equal(lng).
                 and(PersonLanguages.PERSON_LANGUAGES.PERSON_ID!!.equal(personID))).
-                fetchOne()?.getValue(0) as Long?) ?: 0
+                fetchOne()?.getValue(0) as Long?)
 
-                if (pt == 0L) {
+                if (pt == null) {
                     create.insertInto(PersonLanguages.PERSON_LANGUAGES,
                             PersonLanguages.PERSON_LANGUAGES.PERSON_ID, PersonLanguages.PERSON_LANGUAGES.LANGUAGE_ID,
                             PersonLanguages.PERSON_LANGUAGES.LINES_COUNT).values(personID, lngId, linesCount.get().toLong()).execute()
@@ -116,6 +126,7 @@ public class AnalysisService() {
                 }
             }
 
+            println("done")
             callback.onFinish()
         }
     }
