@@ -105,7 +105,7 @@ public class DB {
                 " из ${totalUsers}, молодец, чемпион!:)"
             }
         } else if (betterUsers + 1 == totalUsers) {
-            " Есть куда рости"
+            " Есть куда расти)"
         } else {
             ", Лучше ${Math.round(percentrage)}% пользователей)"
         }
