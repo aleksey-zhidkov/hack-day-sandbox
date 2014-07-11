@@ -1,4 +1,5 @@
 apply plugin: 'kotlin'
+apply plugin: 'groovy'
 apply plugin: 'war'
 
 apply plugin: 'liquibase'
@@ -39,7 +40,15 @@ dependencies {
     		'com.google.code.gson:gson:1.7.2',
     		'org.apache.commons:commons-io:1.3.2',
     		'org.codehaus.jackson:jackson-mapper-asl:1.8.5',
-            'org.eclipse.jgit:org.eclipse.jgit.java7:3.3.2.201404171909-r'
+            'org.eclipse.jgit:org.eclipse.jgit.java7:3.3.2.201404171909-r',
+            'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+
+
+
+
+
+
+
 
     compile group: 'org.apache.wicket', name: 'wicket', version: wicketVersion
     compile group: 'org.apache.wicket', name: 'wicket-extensions', version: wicketVersion

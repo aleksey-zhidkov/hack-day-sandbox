@@ -4,3 +4,4 @@ classes
 src/generated
 .idea
 annotations
+*.iml
